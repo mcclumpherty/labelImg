@@ -32,7 +32,7 @@ class Canvas(QWidget):
 
     CREATE, EDIT = list(range(2))
 
-    epsilon = 24.0
+    epsilon = 8.0
 
     def __init__(self, *args, **kwargs):
         super(Canvas, self).__init__(*args, **kwargs)
@@ -248,12 +248,12 @@ class Canvas(QWidget):
                 self.parent().window().label_coordinates.setText(
                         'Width: %d, Height: %d / X: %d; Y: %d' % (current_width, current_height, pos.x(), pos.y()))
                 break
-        else:  # Nothing found, clear highlights, reset state.
-            if self.h_shape:
-                self.h_shape.highlight_clear()
-                self.update()
-            self.h_vertex, self.h_shape = None, None
-            self.override_cursor(CURSOR_DEFAULT)
+            else:  # Nothing found, clear highlights, reset state.
+                if self.h_shape:
+                    self.h_shape.highlight_clear()
+                    self.update()
+                self.h_vertex, self.h_shape = None, None
+                self.override_cursor(CURSOR_DEFAULT)
 
     def mousePressEvent(self, ev):
         pos = self.transform_pos(ev.pos())
@@ -471,6 +471,11 @@ class Canvas(QWidget):
             self.selected_shape = None
             self.update()
             return shape
+
+    def delete_all(self):
+        self.selected_shape = None
+        self.shapes = []
+        self.update()
 
     def copy_selected_shape(self):
         if self.selected_shape:
