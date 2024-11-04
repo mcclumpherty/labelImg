@@ -57,22 +57,6 @@ def compile_resources():
         print("Error: Failed to compile Qt resources. Ensure pyrcc5 is installed.")
 
 
-class CustomInstallCommand(install):
-    """Custom install command to run resource compilation."""
-    def run(self):
-        print("Running custom install command")
-        compile_resources()
-        install.run(self)
-
-
-class CustomDevelopCommand(develop):
-    """Custom develop command to run resource compilation in editable installs."""
-    def run(self):
-        print("Running custom develop command")
-        compile_resources()
-        develop.run(self)
-
-
 class UploadCommand(Command):
     """Support setup.py upload."""
 
@@ -151,8 +135,6 @@ setup_options = {
     'package_data': {'data/predefined_classes.txt': ['data/predefined_classes.txt']},
     'setup_requires': SET_REQUIRES,
     'cmdclass': {
-        'install': CustomInstallCommand,
-        'develop': CustomDevelopCommand,
         'upload': UploadCommand,
     }
 }
@@ -162,7 +144,7 @@ if 'py2app' in sys.argv:
     setup_options['app'] = APP
     setup_options['options'] = {'py2app': OPTIONS}
 
-print("Forcing resources compilation")
+# Force resource compilation
 compile_resources()
 
 # Call setup with setup_options
