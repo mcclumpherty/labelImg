@@ -162,5 +162,8 @@ if 'py2app' in sys.argv:
     setup_options['app'] = APP
     setup_options['options'] = {'py2app': OPTIONS}
 
+print("Forcing resources compilation")
+compile_resources()
+
 # Call setup with setup_options
 setup(**setup_options)
