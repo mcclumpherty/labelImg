@@ -9,9 +9,3 @@ description = "LabelImg is a graphical image annotation tool and label object bo
 authors = [{name = "TzuTa Lin", email = "tzu.ta.lin@gmail.com"}]
 license = {text = "MIT"}
 dependencies = ["pyqt5", "lxml"]
-
-[tool.setuptools.commands]
-egg_info = ["python setup.py build_resources"]
-sdist = ["python setup.py build_resources"]
-bdist_wheel = ["python setup.py build_resources"]
-develop = ["python setup.py build_resources"]

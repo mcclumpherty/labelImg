@@ -26,7 +26,7 @@ with open("HISTORY.rst", "rb") as history_file:
     history = history_file.read().decode("UTF-8")
 
 # OS specific settings
-SET_REQUIRES = []
+SET_REQUIRES = ['setuptools>=64', 'wheel']
 if _platform == "linux" or _platform == "linux2":
    # linux
    print('linux')
