@@ -31,7 +31,7 @@ elif _platform == "darwin":
    # MAC OS X
    SET_REQUIRES.append('py2app')
 
-required_packages = find_packages()
+required_packages = find_packages(include=['labelImg', 'labelImg.libs', 'labelImg.*'])
 required_packages.append('labelImg')
 
 APP = [NAME + '.py']
