@@ -2,6 +2,14 @@
 requires = ["setuptools>=64", "wheel", "setuptools_scm"]
 build-backend = "setuptools.build_meta"
 
+[project]
+name = "labelImg"
+version = "1.8.6"
+description = "LabelImg is a graphical image annotation tool and label object bounding boxes in images"
+authors = [{name = "TzuTa Lin", email = "tzu.ta.lin@gmail.com"}]
+license = {text = "MIT"}
+dependencies = ["pyqt5", "lxml"]
+
 [tool.setuptools.commands]
 egg_info = ["python setup.py build_resources"]
 sdist = ["python setup.py build_resources"]
