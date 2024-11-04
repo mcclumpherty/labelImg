@@ -43,40 +43,35 @@ OPTIONS = {
     'iconfile': 'resources/icons/app.icns'
 }
 
-class CompileResources(Command):
-    """A custom command to run pyrcc5 to compile resources.qrc."""
-    description = 'Compile Qt resources for labelImg'
-    user_options = []
 
-    def initialize_options(self):
-        pass
+def compile_resources():
+    print("Compiling resources")
+    try:
+        # Run the first pyrcc5 command in the root directory
+        subprocess.check_call(['pyrcc5', 'resources.qrc', '-o', 'resources.py'], cwd=here)
 
-    def finalize_options(self):
-        pass
+        # Run the second pyrcc5 command in the libs directory
+        libs_dir = os.path.join(here, 'libs')
+        subprocess.check_call(['pyrcc5', '../resources.qrc', '-o', 'resources.py'], cwd=libs_dir)
+    except subprocess.CalledProcessError:
+        print("Error: Failed to compile Qt resources. Ensure pyrcc5 is installed.")
 
-    def run(self):
-        print("Compiling resources")
-        try:
-            # Run the first pyrcc5 command in the root directory
-            subprocess.check_call(['pyrcc5', 'resources.qrc', '-o', 'resources.py'], cwd=here)
-
-            # Run the second pyrcc5 command in the libs directory
-            libs_dir = os.path.join(here, 'libs')
-            subprocess.check_call(['pyrcc5', '../resources.qrc', '-o', 'resources.py'], cwd=libs_dir)
-        except subprocess.CalledProcessError:
-            print("Error: Failed to compile Qt resources. Ensure pyrcc5 is installed.")
 
 class CustomInstallCommand(install):
     """Custom install command to run resource compilation."""
     def run(self):
-        self.run_command('build_resources')
+        print("Running custom install command")
+        compile_resources()
         install.run(self)
+
 
 class CustomDevelopCommand(develop):
     """Custom develop command to run resource compilation in editable installs."""
     def run(self):
-        self.run_command('build_resources')
+        print("Running custom develop command")
+        compile_resources()
         develop.run(self)
+
 
 class UploadCommand(Command):
     """Support setup.py upload."""
