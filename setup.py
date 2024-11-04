@@ -151,7 +151,6 @@ setup_options = {
     'package_data': {'data/predefined_classes.txt': ['data/predefined_classes.txt']},
     'setup_requires': SET_REQUIRES,
     'cmdclass': {
-        'build_resources': CompileResources,
         'install': CustomInstallCommand,
         'develop': CustomDevelopCommand,
         'upload': UploadCommand,
