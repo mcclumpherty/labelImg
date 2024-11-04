@@ -1189,6 +1189,8 @@ class MainWindow(QMainWindow, WindowMixin):
                 self.load_yolo_txt_by_filename(txt_path)
             elif os.path.isfile(json_path):
                 self.load_create_ml_json_by_filename(json_path, file_path)
+
+        self.dirty = True
             
 
     def resizeEvent(self, event):
