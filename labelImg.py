@@ -1190,8 +1190,6 @@ class MainWindow(QMainWindow, WindowMixin):
             elif os.path.isfile(json_path):
                 self.load_create_ml_json_by_filename(json_path, file_path)
 
-        self.dirty = True
-            
 
     def resizeEvent(self, event):
         if self.canvas and not self.image.isNull()\
@@ -1658,6 +1656,8 @@ class MainWindow(QMainWindow, WindowMixin):
             prev_file_path = self.m_img_list[self.prev_img_idx]
             self.reset_labels_and_shapes()
             self.show_bounding_box_from_annotation_file(prev_file_path)
+            print("Marking file as dirty")
+            self.dirty = True
 
     def toggle_paint_labels_option(self):
         for shape in self.canvas.shapes:
